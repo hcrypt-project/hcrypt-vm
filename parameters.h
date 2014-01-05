@@ -11,13 +11,12 @@
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
 
-#define N 8
-#define MU 4
-//#define NU 2**256;
-#define LOG_NU 384
-#define S1 8
-#define S2 5
-#define T  5 // Ceiling[Log[2, S2]] + 2
-#define S  3 // Floor[Log[2, s2]] + 1
+#define FHE_N 8
+#define FHE_MU 4
+#define FHE_LOG_NU 384
+#define FHE_S1 8
+#define FHE_S2 5
+#define FHE_T  5
+#define FHE_S  3
 
 #endif

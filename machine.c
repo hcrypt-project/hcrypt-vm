@@ -18,6 +18,7 @@
 #include "integer-fhe.h"
 #include "machine_function.h"
 #include "machine_memory.h"
+#include "types2.h"
 
 long CU_process(fhe_pk_t pk,fhe_sk_t sk);
 void copyreg(fhe_int_t *a,fhe_int_t *b);
@@ -90,6 +91,7 @@ static char command_list[32][5]={"NOP","CMP","BMI","La","J","BEQ","OR","AND","XO
 static int cmd_index;
 static int cmd_arg;
 static int dumpid=0;
+
 
 void CU_init(fhe_pk_t pk)
 {

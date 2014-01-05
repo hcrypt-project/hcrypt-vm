@@ -18,7 +18,7 @@
 /** type defs **/
 typedef struct {
 	mpz_t p, alpha;
-	mpz_t c[S1], B[S1];
+	mpz_t c[FHE_S1], B[FHE_S1];
 } _fhe_pk;
 typedef _fhe_pk fhe_pk_t[1];
 

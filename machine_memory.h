@@ -10,6 +10,7 @@
 
 #include <gmp.h>
 #include "integer-fhe.h"
+#include "types2.h"
 
 static int debug=1;
 

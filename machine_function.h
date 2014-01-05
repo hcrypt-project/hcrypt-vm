@@ -10,6 +10,7 @@
 
 #include <gmp.h>
 #include "integer-fhe.h"
+#include "types2.h"
 
 int Function_decode(fhe_int_t cipher,fhe_sk_t sk);
 int Function_decode2(fhe_int_t *cipher,int size,fhe_sk_t sk);

@@ -7,9 +7,10 @@
 
 
 
-
-#include "types2.h"
 #include "types.h"
+#include "types2.h"
+#include "parameters.h"
+
 
 fhe_sk_t *sk;
 int errors;
@@ -25,14 +26,15 @@ void fhe_pk_store(fhe_pk_t pk,char *s)
 	FILE *f;
 	f=fopen(s,"w");
 	fprintf(f,"mlee public key (p,alpha,{c[i],B[i]}\n");
-	fprintf("%d\n",pk->S1);
-	fprintf("%d\n",pk->S2);
-	fprintf("%d\n",pk->N);
-	fprintf("%d\n",pk->T);
-	fprintf("%d\n",pk->S);
+
+	fprintf(f,"%d\n",FHE_S1);
+	fprintf(f,"%d\n",FHE_S2);
+	fprintf(f,"%d\n",FHE_N);
+	fprintf(f,"%d\n",FHE_T);
+	fprintf(f,"%d\n",FHE_S);
 	gmp_fprintf(f,"%Zd\n", pk->p);
 	gmp_fprintf(f,"%Zd\n", pk->alpha);
-	for (int i = 0; i < pk->S1; i++) {
+	for (int i = 0; i < FHE_S1; i++) {
 		gmp_fprintf(f,"%Zd\n%Zd\n", pk->c[i], pk->B[i]);
 	}
 	fclose(f);
@@ -42,7 +44,7 @@ int fhe_pk_loadkey(fhe_pk_t pk,char *filename)
 	FILE *f;
 	//static fhe_pk_t pk;
 	char line[16384];
-	int i=pk->S1;
+	//int i=pk->S1;
 
 	//fhe_pk_init(pk);
 	f=fopen(filename,"r");
@@ -51,21 +53,21 @@ int fhe_pk_loadkey(fhe_pk_t pk,char *filename)
 
 	fgets(line,16384,f); //header line
 	fgets(line,16384,f); //S1
-	pk->S1=atoi(line);
+	//pk->S1=atoi(line);
 	fgets(line,16384,f); //S2
-	pk->S2=atoi(line);
+	//pk->S2=atoi(line);
 	fgets(line,16384,f); //N
-	pk->N=atoi(line);
+	//pk->N=atoi(line);
 	fgets(line,16384,f); //T
-	pk->T=atoi(line);
+	//pk->T=atoi(line);
 	fgets(line,16384,f); //S
-	pk->S=atoi(line);
+	//pk->S=atoi(line);
 	fgets(line,16384,f); //p
 	mpz_set_str(pk->p,line,10);
 	fgets(line,16384,f); //alpha
 	mpz_set_str(pk->alpha,line,10);
 
-	for(i=0;i<pk->S1;i++)
+	for(int i=0;i<FHE_S1;i++)
 	{
 		fgets(line,16384,f);
 		mpz_set_str(pk->c[i],line,10);
@@ -82,13 +84,13 @@ void fhe_sk_store(fhe_sk_t sk,char *filename)
 
 	f=fopen(filename,"w");
 	fprintf(f,"mlee secret key (p,B)\n");
-	fprintf(f,"%d\n",sk->N);
-	fprintf(f,"%d\n",sk->MU);
-	fprintf(f,"%d\n",sk->LOG_NU);
-	fprintf(f,"%d\n",sk->S1);
-	fprintf(f,"%d\n",sk->S2);
-	fprintf(f,"%d\n",sk->T);
-	fprintf(f,"%d\n",sk->S);
+	fprintf(f,"%d\n",FHE_N);
+	fprintf(f,"%d\n",FHE_MU);
+	fprintf(f,"%d\n",FHE_LOG_NU);
+	fprintf(f,"%d\n",FHE_S1);
+	fprintf(f,"%d\n",FHE_S2);
+	fprintf(f,"%d\n",FHE_T);
+	fprintf(f,"%d\n",FHE_S);
 
 	gmp_fprintf(f,"%Zd\n", sk->p);
 	gmp_fprintf(f,"%Zd\n", sk->B);
@@ -106,19 +108,19 @@ int fhe_sk_loadkey(fhe_sk_t sk,char *filename)
 		return 0;
 	fgets(line,16384,f); //header line
 	fgets(line,16384,f); //S1
-	sk->N=atoi(line);
+	//sk->N=atoi(line);
 	fgets(line,16384,f); //S2
-	sk->MU=atoi(line);
+	//sk->MU=atoi(line);
 	fgets(line,16384,f); //N
-	sk->LOG_NU=atoi(line);
+	//sk->LOG_NU=atoi(line);
 	fgets(line,16384,f); //T
-	sk->S1=atoi(line);
+	//sk->S1=atoi(line);
 	fgets(line,16384,f); //S
-	sk->S2=atoi(line);
+	//sk->S2=atoi(line);
 	fgets(line,16384,f); //S
-	sk->T=atoi(line);
+	//sk->T=atoi(line);
 	fgets(line,16384,f); //S
-	sk->S=atoi(line);
+	//sk->S=atoi(line);
 
 	fgets(line,16384,f); //p
 	mpz_set_str(sk->p,line,10);
@@ -182,7 +184,7 @@ void fhe_autorecrypt(fhe_int_t a,fhe_pk_t pk)
 {
 	if(a->n>1100) //45000
 	{
-		fhe_recrypt(a->v,pk,*sk);
+		fhe_recrypt(a->v,pk);
 		a->n=0;
 	}
 }
