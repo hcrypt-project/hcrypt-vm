@@ -25,8 +25,8 @@
  */
 
 #include <stdlib.h>
-#include <machine_function.h>
-#include <integer-fhe.h>
+#include "machine_function.h"
+#include "integer-fhe.h"
 
 int Function_opcountand;
 int Function_opcountxor;

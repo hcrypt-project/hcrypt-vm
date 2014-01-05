@@ -71,9 +71,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <gmp.h>
-#include <machine_memory.h>
-#include <machine_function.h>
-#include <types.h>
+#include "machine_memory.h"
+#include "machine_function.h"
+#include "types.h"
 
 fhe_int_t r[Memory_ARRAY_ROWS];
 fhe_int_t nr[Memory_ARRAY_ROWS];

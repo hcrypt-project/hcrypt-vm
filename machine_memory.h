@@ -9,7 +9,7 @@
 #define MACHINE_MEMORY_H_
 
 #include <gmp.h>
-#include <integer-fhe.h>
+#include "integer-fhe.h"
 
 static int debug=1;
 

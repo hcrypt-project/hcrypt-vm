@@ -14,10 +14,10 @@
 #include <time.h>
 
 #include <gmp.h>
-#include <integer-fhe.h>
 
-#include <machine_function.h>
-#include <machine_memory.h>
+#include "integer-fhe.h"
+#include "machine_function.h"
+#include "machine_memory.h"
 
 long CU_process(fhe_pk_t pk,fhe_sk_t sk);
 void copyreg(fhe_int_t *a,fhe_int_t *b);
