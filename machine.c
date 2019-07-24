@@ -15,7 +15,7 @@
 
 #include <gmp.h>
 
-#include "integer-fhe-stub.h"
+#include "integer-fhe.h"
 #include "machine_function.h"
 #include "machine_memory.h"
 #include "types2.h"
