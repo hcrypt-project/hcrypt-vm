@@ -12,16 +12,16 @@
 #include "parameters.h"
 
 
-fhe_sk_t *sk;
+int *sk;
 int errors;
 
-void fhe_lib_init(fhe_sk_t *sk2)
+void fhe_lib_init(int *sk2)
 {
 	sk=sk2;
 	errors=0;
 }
 /** I/O ***/
-void fhe_pk_store(fhe_pk_t pk,char *s)
+void fhe_pk_store(int pk,char *s)
 {
 	FILE *f;
 	f=fopen(s,"w");
@@ -39,10 +39,10 @@ void fhe_pk_store(fhe_pk_t pk,char *s)
 	}
 	fclose(f);
 }
-int fhe_pk_loadkey(fhe_pk_t pk,char *filename)
+int fhe_pk_loadkey(int pk,char *filename)
 {
 	FILE *f;
-	//static fhe_pk_t pk;
+	//static int pk;
 	char line[16384];
 	//int i=pk->S1;
 
@@ -78,7 +78,7 @@ int fhe_pk_loadkey(fhe_pk_t pk,char *filename)
 
 	return 1;
 }
-void fhe_sk_store(fhe_sk_t sk,char *filename)
+void fhe_sk_store(int sk,char *filename)
 {
 	FILE *f;
 
@@ -96,10 +96,10 @@ void fhe_sk_store(fhe_sk_t sk,char *filename)
 	gmp_fprintf(f,"%Zd\n", sk->B);
 	fclose(f);
 }
-int fhe_sk_loadkey(fhe_sk_t sk,char *filename)
+int fhe_sk_loadkey(int sk,char *filename)
 {
 	FILE *f;
-	//static fhe_sk_t sk;
+	//static int sk;
 	char line[16384];
 
 	//fhe_sk_init(sk);
@@ -131,25 +131,25 @@ int fhe_sk_loadkey(fhe_sk_t sk,char *filename)
 	return 1;
 }
 
-void fhe_int_init(fhe_int_t i)
+void fhe_int_init(int i)
 {
 	mpz_init(i->v);
 	i->n=0;
 }
 
-void fhe_int_clear(fhe_int_t i)
+void fhe_int_clear(int i)
 {
 	mpz_clear(i->v);
 }
 
-void fhe_int_set(fhe_int_t to,fhe_int_t from)
+void fhe_int_set(int to,int from)
 {
 	mpz_set(to->v,from->v);
 	to->n=from->n;
 }
 
 void
-fhe_int_add(fhe_int_t res, fhe_int_t a, fhe_int_t b, fhe_pk_t pk)
+fhe_int_add(int res, int a, int b, int pk)
 {
 	mpz_add(res->v, a->v, b->v);
 	mpz_mod(res->v, res->v, pk->p);
@@ -165,7 +165,7 @@ fhe_int_add(fhe_int_t res, fhe_int_t a, fhe_int_t b, fhe_pk_t pk)
 }
 
 void
-fhe_int_mul(fhe_int_t res, fhe_int_t a, fhe_int_t b, fhe_pk_t pk)
+fhe_int_mul(int res, int a, int b, int pk)
 {
 	mpz_mul(res->v, a->v, b->v);
 	mpz_mod(res->v, res->v, pk->p);
@@ -180,7 +180,7 @@ fhe_int_mul(fhe_int_t res, fhe_int_t a, fhe_int_t b, fhe_pk_t pk)
 	fhe_autorecrypt(res,pk);
 }
 
-void fhe_autorecrypt(fhe_int_t a,fhe_pk_t pk)
+void fhe_autorecrypt(int a,int pk)
 {
 	if(a->n>1100) //45000
 	{

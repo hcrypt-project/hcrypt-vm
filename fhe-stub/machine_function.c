@@ -32,12 +32,12 @@ int Function_opcountand;
 int Function_opcountxor;
 int Function_opcountnot;
 
-int Function_decode(fhe_int_t cipher,fhe_sk_t sk)
+int Function_decode(int cipher,int sk)
 {
 	return fhe_decrypt(cipher->v,sk);
 }
 
-int Function_decode2(fhe_int_t *cipher,int size,fhe_sk_t sk)
+int Function_decode2(int *cipher,int size,int sk)
 {
 	int i,m;
 	int res=0;
@@ -54,7 +54,7 @@ int Function_decode2(fhe_int_t *cipher,int size,fhe_sk_t sk)
 	return res;
 }
 
-void Function_encode(int size,int value,fhe_int_t *r,fhe_pk_t pk)
+void Function_encode(int size,int value,int *r,int pk)
 {
 	int i,m;
 	int mask=1;
@@ -70,34 +70,34 @@ void Function_encode(int size,int value,fhe_int_t *r,fhe_pk_t pk)
 	//printf("\n");
 }
 
-void Function_and2(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_pk_t pk)
+void Function_and2(int res,int a,int b,int pk)
 {
 	Function_opcountand++;
 	fhe_mul(res,a,b,pk);
 }
 
-void Function_and3(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_pk_t pk)
+void Function_and3(int res,int a,int b,int c,int pk)
 {
-	fhe_int_t t;
+	int t;
 	fhe_int_init(t);
 	Function_and2(t,a,b,pk);
 	Function_and2(res,t,c,pk);
 	fhe_int_clear(t);
 }
 
-void Function_and4(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,fhe_pk_t pk)
+void Function_and4(int res,int a,int b,int c,int d,int pk)
 {
-	fhe_int_t t;
+	int t;
 	fhe_int_init(t);
 	Function_and3(t,a,b,c,pk);
 	Function_and2(res,t,d,pk);
 	fhe_int_clear(t);
 }
 
-void Function_and8(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,
-								 fhe_int_t e,fhe_int_t f,fhe_int_t g,fhe_int_t h,fhe_pk_t pk)
+void Function_and8(int res,int a,int b,int c,int d,
+								 int e,int f,int g,int h,int pk)
 {
-	fhe_int_t t1,t2;
+	int t1,t2;
 	fhe_int_init(t1);
 	fhe_int_init(t2);
 
@@ -109,11 +109,11 @@ void Function_and8(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d
 	fhe_int_clear(t2);
 }
 
-void Function_or15(fhe_int_t res,fhe_int_t a1,fhe_int_t a2,fhe_int_t a3,fhe_int_t a4,fhe_int_t a5,
-								  fhe_int_t a6,fhe_int_t a7,fhe_int_t a8,fhe_int_t a9,fhe_int_t a10,
-								  fhe_int_t a11,fhe_int_t a12,fhe_int_t a13,fhe_int_t a14,fhe_int_t a15,fhe_pk_t pk)
+void Function_or15(int res,int a1,int a2,int a3,int a4,int a5,
+								  int a6,int a7,int a8,int a9,int a10,
+								  int a11,int a12,int a13,int a14,int a15,int pk)
 {
-	fhe_int_t t1,t2,t3,t4;
+	int t1,t2,t3,t4;
 	fhe_int_init(t1);
 	fhe_int_init(t2);
 	fhe_int_init(t3);
@@ -132,15 +132,15 @@ void Function_or15(fhe_int_t res,fhe_int_t a1,fhe_int_t a2,fhe_int_t a3,fhe_int_
 }
 
 
-void Function_xor(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_pk_t pk)
+void Function_xor(int res,int a,int b,int pk)
 {
 	Function_opcountxor++;
 	fhe_add(res,a,b,pk);
 }
 
-void Function_not(fhe_int_t res,fhe_int_t a,fhe_pk_t pk)
+void Function_not(int res,int a,int pk)
 {
-	fhe_int_t t;
+	int t;
 	fhe_int_init(t);
 	Function_opcountnot++;
 	fhe_encrypt(t->v,pk,1);
@@ -149,27 +149,27 @@ void Function_not(fhe_int_t res,fhe_int_t a,fhe_pk_t pk)
 	fhe_int_clear(t);
 }
 
-void Function_or4(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,fhe_pk_t pk)
+void Function_or4(int res,int a,int b,int c,int d,int pk)
 {
-	fhe_int_t t;
+	int t;
 	fhe_int_init(t);
 	Function_or3(t,a,b,c,pk);
 	Function_or2(res,t,d,pk);
 	fhe_int_clear(t);
 }
 
-void Function_or3(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_pk_t pk)
+void Function_or3(int res,int a,int b,int c,int pk)
 {
-	fhe_int_t t;
+	int t;
 	fhe_int_init(t);
 	Function_or2(t,a,b,pk);
 	Function_or2(res,t,c,pk);
 	fhe_int_clear(t);
 }
 
-void Function_or2(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_pk_t pk)
+void Function_or2(int res,int a,int b,int pk)
 {
-	fhe_int_t ta,tx;
+	int ta,tx;
 	fhe_int_init(ta);
 	fhe_int_init(tx);
 	Function_and2(ta,a,b,pk);
@@ -179,24 +179,24 @@ void Function_or2(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_pk_t pk)
 	fhe_int_clear(tx);
 }
 
-void Function_or6(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,fhe_int_t e,fhe_int_t f,fhe_pk_t pk)
+void Function_or6(int res,int a,int b,int c,int d,int e,int f,int pk)
 {
-	fhe_int_t t;
+	int t;
 	fhe_int_init(t);
 	Function_or3(t,a,b,c,pk);
 	Function_or4(res,t,d,e,f,pk);
 	fhe_int_clear(t);
 }
 
-void Function_ha(fhe_int_t a,fhe_int_t b,fhe_int_t *res,fhe_pk_t pk)
+void Function_ha(int a,int b,int *res,int pk)
 {
 	Function_xor(res[0],a,b,pk);
 	Function_and2(res[1],a,b,pk);
 }
 
-void Function_fa(fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t *res,fhe_pk_t pk)
+void Function_fa(int a,int b,int c,int *res,int pk)
 {
-	fhe_int_t ha1[2],ha2[2];
+	int ha1[2],ha2[2];
 	fhe_int_init(ha1[0]);
 	fhe_int_init(ha1[1]);
 	fhe_int_init(ha2[0]);

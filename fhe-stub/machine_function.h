@@ -12,31 +12,31 @@
 #include "integer-fhe.h"
 #include "types2.h"
 
-int Function_decode(fhe_int_t cipher,fhe_sk_t sk);
-int Function_decode2(fhe_int_t *cipher,int size,fhe_sk_t sk);
-void Function_encode(int size,int value,fhe_int_t *r,fhe_pk_t pk);
+int Function_decode(int cipher,int sk);
+int Function_decode2(int *cipher,int size,int sk);
+void Function_encode(int size,int value,int *r,int pk);
 
-void Function_and2(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_pk_t pk);
-void Function_and3(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_pk_t pk);
-void Function_and4(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,fhe_pk_t pk);
-void Function_and8(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,
-								 fhe_int_t e,fhe_int_t f,fhe_int_t g,fhe_int_t h,fhe_pk_t pk);
+void Function_and2(int res,int a,int b,int pk);
+void Function_and3(int res,int a,int b,int c,int pk);
+void Function_and4(int res,int a,int b,int c,int d,int pk);
+void Function_and8(int res,int a,int b,int c,int d,
+								 int e,int f,int g,int h,int pk);
 
 
-void Function_xor(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_pk_t pk);
+void Function_xor(int res,int a,int b,int pk);
 
-void Function_not(fhe_int_t res,fhe_int_t a,fhe_pk_t pk);
+void Function_not(int res,int a,int pk);
 
-void Function_or2(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_pk_t pk);
-void Function_or3(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_pk_t pk);
-void Function_or4(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,fhe_pk_t pk);
-void Function_or6(fhe_int_t res,fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t d,fhe_int_t e,fhe_int_t f,fhe_pk_t pk);
-void Function_or15(fhe_int_t res,fhe_int_t a1,fhe_int_t a2,fhe_int_t a3,fhe_int_t a4,fhe_int_t a5,
-								  fhe_int_t a6,fhe_int_t a7,fhe_int_t a8,fhe_int_t a9,fhe_int_t a10,
-								  fhe_int_t a11,fhe_int_t a12,fhe_int_t a13,fhe_int_t a14,fhe_int_t a15,fhe_pk_t pk);
+void Function_or2(int res,int a,int b,int pk);
+void Function_or3(int res,int a,int b,int c,int pk);
+void Function_or4(int res,int a,int b,int c,int d,int pk);
+void Function_or6(int res,int a,int b,int c,int d,int e,int f,int pk);
+void Function_or15(int res,int a1,int a2,int a3,int a4,int a5,
+								  int a6,int a7,int a8,int a9,int a10,
+								  int a11,int a12,int a13,int a14,int a15,int pk);
 
-void Function_ha(fhe_int_t a,fhe_int_t b,fhe_int_t *res,fhe_pk_t pk);
-void Function_fa(fhe_int_t a,fhe_int_t b,fhe_int_t c,fhe_int_t *res,fhe_pk_t pk);
+void Function_ha(int a,int b,int *res,int pk);
+void Function_fa(int a,int b,int c,int *res,int pk);
 
 
 #endif /* FUNCTION_H_ */

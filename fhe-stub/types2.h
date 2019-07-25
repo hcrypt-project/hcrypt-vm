@@ -10,11 +10,11 @@
 
 
 #include <stdio.h>
-#include <gmp.h>
+//#include <gmp.h>
 #include "integer-fhe.h"
 
 typedef struct {
-	mpz_t v;
+	int v;
 	int n;
 } _fhe_int;
 typedef _fhe_int fhe_int_t[1];

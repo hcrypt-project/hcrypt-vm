@@ -75,13 +75,13 @@
 #include "machine_function.h"
 #include "types.h"
 
-fhe_int_t r[Memory_ARRAY_ROWS];
-fhe_int_t nr[Memory_ARRAY_ROWS];
-fhe_int_t rowsel;
-fhe_int_t nam,nam2,nrw,read,write,nsel,ZERO;
+int r[Memory_ARRAY_ROWS];
+int nr[Memory_ARRAY_ROWS];
+int rowsel;
+int nam,nam2,nrw,read,write,nsel,ZERO;
 static int inited=0;
 
-void Memory_access(fhe_int_t *a,fhe_int_t *reg,fhe_int_t rw,fhe_int_t *b1,fhe_pk_t pk,fhe_sk_t sk)
+void Memory_access(int *a,int *reg,int rw,int *b1,int pk,int sk)
 {
 	int row;
 	int mask;
@@ -166,7 +166,7 @@ void Memory_access(fhe_int_t *a,fhe_int_t *reg,fhe_int_t rw,fhe_int_t *b1,fhe_pk
 	return;
 }
 
-void Memory_access2(fhe_int_t *a,fhe_int_t *reg,fhe_int_t rw,fhe_int_t *b1,fhe_pk_t pk,fhe_sk_t sk)
+void Memory_access2(int *a,int *reg,int rw,int *b1,int pk,int sk)
 {
 	int row;
 	int mask;
@@ -174,7 +174,7 @@ void Memory_access2(fhe_int_t *a,fhe_int_t *reg,fhe_int_t rw,fhe_int_t *b1,fhe_p
 	int i;
 	int i2;
 	int j;
-	fhe_int_t b2[Memory_WORD_SIZE];
+	int b2[Memory_WORD_SIZE];
 
 
 	if(!inited)
@@ -292,10 +292,10 @@ void Memory_access2(fhe_int_t *a,fhe_int_t *reg,fhe_int_t rw,fhe_int_t *b1,fhe_p
 	return;
 }
 
-void ALU_add(fhe_int_t *a,fhe_int_t *b,fhe_int_t carry,fhe_int_t *res,fhe_pk_t pk)
+void ALU_add(int *a,int *b,int carry,int *res,int pk)
 {
-	fhe_int_t t[2];
-	fhe_int_t c;
+	int t[2];
+	int c;
 	int i;
 
 	fhe_int_init(t[0]);
@@ -316,10 +316,10 @@ void ALU_add(fhe_int_t *a,fhe_int_t *b,fhe_int_t carry,fhe_int_t *res,fhe_pk_t p
 	fhe_int_clear(c);
 }
 
-void ALU_addadr(fhe_int_t *a,fhe_int_t *b,fhe_int_t *res,fhe_pk_t pk)
+void ALU_addadr(int *a,int *b,int *res,int pk)
 {
-	fhe_int_t t[2];
-	fhe_int_t c;
+	int t[2];
+	int c;
 	int i;
 
 	fhe_int_init(t[0]);
@@ -340,7 +340,7 @@ void ALU_addadr(fhe_int_t *a,fhe_int_t *b,fhe_int_t *res,fhe_pk_t pk)
 }
 
 
-void loadMemory(fhe_int_t *ac,fhe_int_t *pc,char *filename)
+void loadMemory(int *ac,int *pc,char *filename)
 {
 	int i,j;
 	FILE *f;
@@ -376,7 +376,7 @@ void loadMemory(fhe_int_t *ac,fhe_int_t *pc,char *filename)
 	fclose(f);
 }
 
-void memdump(int rows,fhe_sk_t sk)
+void memdump(int rows,int sk)
 {
     int i,j;
 	int shift,val;
